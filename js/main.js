@@ -781,3 +781,57 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the hamburger menu and navigation elements
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    // Toggle navigation when hamburger is clicked
+    hamburger.addEventListener('click', function() {
+        // Toggle active class on hamburger
+        this.classList.toggle('active');
+        
+        // Toggle active class on nav links
+        navLinks.classList.toggle('active');
+        
+        // Prevent scrolling when menu is open
+        document.body.classList.toggle('nav-open');
+    });
+    
+    // Close menu when a link is clicked
+    const navItems = document.querySelectorAll('.nav-links li a');
+    navItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Only execute on mobile view
+            if (window.innerWidth <= 768) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.classList.remove('nav-open');
+            }
+        });
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const isClickInsideNav = navLinks.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
+        
+        // If menu is open and click is outside nav and hamburger
+        if (navLinks.classList.contains('active') && !isClickInsideNav && !isClickOnHamburger) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.classList.remove('nav-open');
+        }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            // Reset mobile menu state on larger screens
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.classList.remove('nav-open');
+        }
+    });
+});

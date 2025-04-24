@@ -2520,3 +2520,18 @@ body.modal-open {
         font-size: 24px;
     }
 }
+
+.member-img-u img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This makes the image cover the container while maintaining aspect ratio */
+    object-position: center top; /* Focus on the top part of the image (face) */
+    transition: transform 0.5s ease;
+}
+
+.member-img-u {
+    width: 100%;
+    height: 300px; /* Fixed height for consistent appearance */
+    overflow: hidden;
+    position: relative;
+}
